@@ -1,0 +1,85 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>{%block cabecera %}Zucchero{% endblock %}</title>
+  
+
+  <style>
+  #codered {
+        background-image: url("{% static 'img/backer.jpg' %}") ;
+        background-color: white;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+        margin: 0;
+        padding:0;
+      }
+ 
+  hr {
+  display: block!important;
+  height: 1px!important;
+  border: 0!important;
+  border-top: 1px solid #660066!important;
+  margin: 1em 0!important;
+  padding: 0!important; 
+  }
+  
+    {% block style %}
+   
+    {% endblock %}
+  </style>
+  {% include "head_css.html" %}
+  
+  </head>
+
+  <body>
+
+    {% include "navbar.html" %}
+
+    {% block jumbotron %}
+
+    {% endblock %}
+    
+    <div class="container">
+      <!--Contenido de la web--> 
+
+      
+
+      {% block content %}
+
+      {% endblock %}
+    </div>
+    <p><br><br></p>
+            <hr>
+    <div class="copyright" style="text-align:right;">
+            <a href="{% url 'about' %}">Términos</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+            <a href="{% url 'about' %}">API</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'about' %}">Ayuda</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'about' %}">Seguridad</a> &nbsp;&nbsp;&nbsp;&nbsp;
+            
+            |<span class="fa-stack fa-lg">
+                <i class="fa fa-github fa-stack-1x"></i>
+            </span>
+            <a href="https://github.com/eduardorasgado">Github</a> 
+            | &copy;2018. All rights reserved. Eduardo Rasgado. &nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="{% static "/js/vendor/jquery/jquery.min.js" %}"><\/script>')</script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+  </body>
+</html>

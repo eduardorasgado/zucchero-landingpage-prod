@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+    {%block cabecera %}Bienvenido | {{block.super}}{% endblock %}
+
+    <!--ejemplo de como meter estilo al jumbotron del bootstrap de forma global ojo-->
+
+    <style>
+
+       {% block style%}
+
+      #codered2 {
+        background-image: url("{% static 'img/backer.jpg' %}") ;
+        background-color: white;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+
+
+      }
+        .jumbotron{
+       background-color: #9A2EFE!important;
+       color: #FFF !important;
+       }
+       .btn-primary {
+       border-color: #FFF!important;
+       background-color: #4bff00b3!important;
+       }
+       .btn-primary2 {
+       border-color: #FFF!important;
+       background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)!important;
+       }
+
+       .fa-cog,
+       .fa-fighter-jet,
+       .fa-cubes {
+        color: gray;
+       }
+
+       .centrar {
+        text-align: center;
+        }
+
+       #contenedor {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden;
+        display: block;
+       }
+
+       #contenedor iframe,
+       #contenedor object,
+       #contenedor embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 99.5%;
+        height: 90.5%;
+       }
+
+       #contenedor img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 80%;
+       }
+       {% endblock %}    
+
+    </style>
+
+    
+
+    {% block jumbotron %}
+    {% if not request.user.is_staff %}
+    <div class="jumbotron" style='background-color: #9A2EFE!important'>
+        <div class="container">
+        <div class='row'>
+            <div class='col-sm-6'>
+                <h1><font color="white">Zucchero </font><i class="fa fa-superpowers" aria-hidden="true" style="color: cyan"></i></h1>
+                <p class="lead"><font color="white">Hola, bienvenido a nuestra web, tanto como si eres usuario, como si no pero estas interesado en serlo, te invitamos a revisar algunas cosas muy interesantes sobre el uso de Zucchero y sus ventajas de forma mas desarrollada.<br/> Atte <strong>Team Z.</strong> ;) .</font></p>
+                <a class="btn btn-lg btn-primary" href="{% url 'about' %}" role="button">Ver Zucchero docs &raquo; </a>
+            </div>
+            <div class="container col-sm-6">
+                <!--?autoplay=1;controls=0 nos da el autoplay a cualquier video y quita controles, YT API-->
+              <div id="contenedor"><iframe src="https://www.youtube.com/embed/9No-FiEInLA?autoplay=1;controls=0" frameborder="0" allowfullscreen></iframe></div>
+            </div>
+        </div>      
+        </div>    
+    </div> 
+    {% else %}
+        {{ queryset }}
+    {% endif %}
+
+    {% endblock %}
+
+    {% block content %}
+    {% if not request.user.is_staff %}
+    <!--Formulario de Django, el token permite acceder al algoritmo d edenegacion de falsificacion de peticiones-->
+
+    <div class="section" id="forms">
+        <br/>
+        <h1><span>¿Deseas registrarte para más contenido de desarrolladores? </span></h1>
+        <hr/>
+        <!--Esto lo encontramos definido en views.py de boletin-->
+        <p class='lead text-align-center'>{{titulo}}</p>
+        <hr/>
+        <div class='row'>
+            {%if el_form %}
+            <div class="col-sm-6">
+                {% if not user.is_authenticated %}
+                <div class="jumbotron">
+                        <form method="POST" action="">{% csrf_token %}
+                        {{el_form|crispy}}
+                        <br/>
+                        <input class="btn btn-lg btn-primary" role="button" type="submit" value="Suscripción al boletín&raquo;"/>
+                        <!--input type="submit" value="Registrame"/-->
+                        </form>
+                </div>
+                {% else %}
+                <div id="codered2" class="jumbotron" align="center" style='height: 325px'>
+                    <br>
+                    <h4><i class="fa fa-bolt" aria-hidden="true" style="color:yellow;"></i> Actualiza a <a href="https://github.com/eduardorasgado">Premium</a> y aprovecha de contenido exclusivo ya mismo!</h4>
+                    <br>
+                    <a class="btn btn-lg btn-primary" href="{% url 'about' %}" role="button">Premium!&raquo; </a>
+                </div>
+                {% endif %}
+             </div>
+             {% endif %}
+
+
+            <div class="col-sm-6">
+                <div id="codered2"class="jumbotron" style='height: 325px'>
+                    <h3 class="text-align-center">"Declaremos variables, no la guerra"</h3><h3 class="text-align-center"><i class="fa fa-terminal" aria-hidden="true"></i></h3>
+                    <p class="lead">Quieres darnos sugerencias, unirte a la comunidad o compartir algo con nosotros?</p>
+                    <br/>
+                    <div align="center"><a class="btn btn-lg btn-primary2" href="{% url 'contact' %}" role="button">Contáctanos!&raquo; </a></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--imagenes-->
+    <div class="section text-align-center">
+        <div class='row'>
+            <div class="col-sm-6">
+                <div id="contenedor"><img src="{% static 'img/pie.png' %}" frameborder="0"></div>
+            </div>
+                <div class="col-sm-6"><div id="contenedor"><img src="{% static 'img/el.jpg' %}" frameborder="0"></div>
+            </div>
+        </div>
+    </div>
+    <!--jumbos de fortalezas-->
+    <div class="section text-align-center">
+        <div class='row'>
+            <div class="col-sm-2">
+                <div class="jumbotron" style="background-color: #9A2EFE!important; height: 30px">
+                    <p class="lead"><font color="white">Responsivo </font><br/><i class="fa fa-desktop" aria-hidden="true"></i></p>
+                </div>
+                <div class="jumbotron" style="background-color: #ccff33!important; height: 30px"><p class="lead"><font color="gray">Mantenible </font><br/><i class="fa fa-cubes" aria-hidden="true"></i></p></div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="jumbotron" style="background-color: #ccff33!important; height: 30px">
+                    <p class="lead"><font color="gray">Eficiente </font><br/><i class="fa fa-cog fa-spin" aria-hidden="true"></i></p>
+                </div>
+                <div class="jumbotron" style="background-color: #9A2EFE!important; height: 30px"><p class="lead"><font color="white">Coqueto </font><br/><i class="fa fa-rocket" aria-hidden="true"></i></p></div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="jumbotron" style="background-color: #9A2EFE!important; height: 30px">
+                    <p class="lead"><font color="white">Simple </font><br/><i class="fa fa-code-fork" aria-hidden="true"></i></p>
+                </div>
+                <div class="jumbotron" style="background-color: #ccff33!important; height: 30px"><p class="lead"><font color="gray">Escalable </font><br/><i class="fa fa-fighter-jet" aria-hidden="true"></i></p></div>
+            </div>
+            <!--jumbo de icono gigante-->
+            <div class="col-sm-6">
+                <div id="codered2" class="jumbotron" style="background-color: #9A2EFE!important;">
+                    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i><br/><br/><br/><p class="lead">Mucho de Bootstrap, Django y FontAwesome!</p>
+                </div>
+            </div>
+
+        </div>
+        <!--redes sociales-->
+        <div class="row">
+            <div>
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-twitter fa-stack-1x" style="color: #33ccff;"></i>
+                </span>
+                @zuccheromx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-facebook fa-stack-1x" style="color: blue;"></i>
+                </span>
+                ZuccheroMX &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-youtube fa-stack-1x" style="color: red;"></i>
+                </span>
+                ZuccheroOfficialChannel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div style="text-align:right;">
+                <span class="fa-stack fa-lg">
+                <i class="fa fa-square-o fa-stack-2x"></i>
+                <i class="fa fa-paypal fa-stack-1x"></i>
+                </span>
+                Te gustaría realizar una donación?
+                <a class="btn btn-lg btn-primary" href="{% url 'about' %}" role="button">Donación &raquo; </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+     {% endblock %}
+
+       
+

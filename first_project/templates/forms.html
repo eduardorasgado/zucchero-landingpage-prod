@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<hr/>
+<h4 class='text-align-center'>{{ titulo }}</h4>
+<hr/>
+<br/>
+<div class='row'>
+	<div class='col-sm-6'>
+		{%if form %}
+		
+			<form method="POST" action="">{% csrf_token %}
+				{{form | crispy}}
+				<input class='btn btn-primary' type="submit" value="Enviar&raquo;"/>
+			</form>
+	
+		{% endif %}
+
+		{%if not form %}
+			<a class="btn btn-lg btn-primary" href="{% url 'inicio' %}" role="button">Volver al inicio&raquo; </a>
+		{% endif %}
+    </div>
+</div>
+
+{% endblock %}
