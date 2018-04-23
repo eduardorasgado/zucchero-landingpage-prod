@@ -1,0 +1,24 @@
+Hosting:
+
+
+mkvirtualenv myvirtualenv --python=/usr/bin/python3.6
+
+/home/EduardoRasgado/zucchero-landingpage-prod/first_project/first_project
+
+
+manage.py:
+home/EduardoRasgado/zuccherop/first_project
+
+settings.py:
+/home/EduardoRasgado/zuccherop/first_project/first_project
+
+virtualenv:
+zucchero-app
+
+wsgi:
+path: /home/EduardoRasgado/zuccherop/first_project
+
+http://eduardorasgado.pythonanywhere.com/
+
+Ayuda: 
+https://help.pythonanywhere.com/pages/DeployExistingDjangoProject/
